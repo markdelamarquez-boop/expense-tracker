@@ -23,6 +23,12 @@ jobs:
         sudo apt-get install -y build-essential ccache git libffi-dev libssl-dev python3-dev libltdl-dev autoconf automake libtool zip unzip zlib1g-dev openjdk-17-jdk
         pip install --upgrade buildozer cython
 
+    - name: Accept Android licenses
+      run: |
+        mkdir -p ~/.android
+        sdkmanager --version || true
+        yes | sdkmanager --licenses || true
+
     - name: Build with Buildozer
       run: |
         buildozer -v android debug
